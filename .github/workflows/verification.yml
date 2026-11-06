@@ -1,0 +1,31 @@
+name: Bounded verification
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quick-exact-and-guards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact finite checks and semantic negatives
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python -B checks/tsallis_order13_certificate.py --output ci-receipts/exact.json
+          python -B -O checks/tsallis_order13_certificate.py --output ci-receipts/exact-optimized.json
+          python -B checks/test_guards.py --output ci-receipts/guards.json
+          python -B -O checks/test_guards.py --output ci-receipts/guards-optimized.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bounded-verification-receipts
+          path: ci-receipts/
+          if-no-files-found: warn
+

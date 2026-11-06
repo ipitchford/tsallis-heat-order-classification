@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Please cite this AI-assisted, unrefereed research candidate; citation does not imply independent validation."
+type: article
+title: "Complete monotonicity of Tsallis entropy under heat flow: a sharp order classification"
+authors:
+  - name: Anonymous
+version: 0.1.0-candidate
+date-released: 2026-11-06
+doi: 10.5281/zenodo.24001602
+license: CC0-1.0
+abstract: "AI-assisted, unrefereed candidate. The quadratic order is the unique positive Tsallis order with universal alternating heat-flow entropy derivatives. For each fixed nonexceptional order, a density-varying strictly log-concave family supplies high-derivative failures. Shannon counterexamples and quadratic positivity are inherited and attributed. A separate exact-arithmetic and analytic-transfer witness has order 3/2 and derivative 13; no log-concavity or least-order assertion is made for that witness."
+

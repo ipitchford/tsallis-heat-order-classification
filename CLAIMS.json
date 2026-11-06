@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0",
+  "release": "tsallis-heat-order-classification",
+  "version": "0.1.0-candidate",
+  "date": "2026-11-06",
+  "creator": "Anonymous",
+  "doi": "10.5281/zenodo.24001602",
+  "conceptDoi": "10.5281/zenodo.24001601",
+  "status": "AI-assisted unrefereed candidate",
+  "assurance": {
+    "externalPeerReview": false,
+    "formalVerification": false,
+    "independentExternalReproduction": false,
+    "priorityEstablished": false
+  },
+  "claims": [
+    {
+      "id": "tsallis-heat-order-classification:T1",
+      "statement": "Only alpha=2 satisfies the universal alternating derivative property for smooth positive strictly log-concave Gaussian-tailed inputs in each dimension.",
+      "location": "Theorem 1; Theorem 2; Proposition 5; Corollary 6",
+      "evidence": "Written analytic proof with attributed Shannon and quadratic inputs.",
+      "limitations": "Fixed alpha; density varies with derivative order; no uniform threshold or priority guarantee."
+    },
+    {
+      "id": "tsallis-heat-order-classification:T2",
+      "statement": "For each fixed alpha>0 not in {1,2}, the explicit family has negative signed mth derivative for every sufficiently large m.",
+      "location": "Theorem 2; Lemmas 3–4",
+      "evidence": "Written spectral and Gaussian-transfer argument.",
+      "limitations": "No single density failing all high derivatives is asserted."
+    },
+    {
+      "id": "tsallis-heat-order-classification:T3",
+      "statement": "The specified alpha=3/2 density violates the sign at derivative 13 and time 1/50.",
+      "location": "Theorem 7; exact rational appendix; checks/tsallis_order13_certificate.py",
+      "evidence": "Exact finite rational certificate plus separately proved analytic transfer.",
+      "limitations": "No log-concavity, minimum derivative order or proof-assistant verification claimed."
+    },
+    {
+      "id": "tsallis-heat-order-classification:T4",
+      "statement": "Dilation preserves strict failure, permitting unit variance or prescribed positive failure time separately.",
+      "location": "Corollary 8",
+      "evidence": "Elementary heat-scaling corollary.",
+      "limitations": "Time divided by variance is invariant; no independent prescription of both."
+    }
+  ]
+}

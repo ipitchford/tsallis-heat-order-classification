@@ -1,0 +1,1319 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\documentclass[
+  11pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{2}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Complete monotonicity of Tsallis entropy under heat flow:\\a sharp order classification}
+\author{Anonymous}
+\date{6 November 2026\\Version 0.1.0-candidate\\\small DOI: \href{https://doi.org/10.5281/zenodo.24001602}{10.5281/zenodo.24001602}}
+
+\begin{document}
+
+\maketitle
+
+AI-assisted, unrefereed mathematical candidate. Original prose is
+dedicated to the public domain under CC0 1.0; accompanying code is
+supplied under its stated licence.
+
+\begin{abstract}
+
+For a probability density evolving under the linear heat equation,
+consider the alternating signs of all derivatives of its Tsallis
+entropy. We prove that the quadratic order \(\alpha=2\) is the unique
+positive order for which these inequalities hold universally. For each
+fixed \(\alpha>0\) with \(\alpha\notin\{1,2\}\), we give an explicit
+family of smooth, strictly positive, strictly log-concave densities
+\(f_{\alpha,m}\) with Gaussian tails, indexed by the derivative order
+\(m\), for which the signed \(m\)th entropy derivative is negative for
+every sufficiently large \(m\). The input density varies with \(m\).
+Previously established Shannon counterexamples supply the case
+\(\alpha=1\). The proof extends the two-frequency spectral construction
+and Gaussian localisation of Zou, Fan, Gao and Wang: an order-dependent
+choice of the second Fourier amplitude makes the unique dominant
+spectral coefficient equal to \(-\alpha|\alpha-2|/8\). A separate
+example at \(\alpha=3/2\) specifies a single real-line density and
+certifies failure at derivative order \(13\) using an exact rational
+periodic calculation and a quantitative analytic transfer. The result
+classifies the order parameter pointwise; it does not claim the first
+refutation of the Shannon conjecture or a new localisation mechanism.
+
+\end{abstract}
+
+\section{Question, conventions and
+scope}\label{question-conventions-and-scope}
+
+Adding Gaussian noise smooths a probability density. Entropy
+inequalities ask which features of that smoothing can be described by
+universal signs. An increasing entropy curve is one such property;
+alternating signs at every derivative order are a much stronger
+requirement. This paper determines precisely which positive Tsallis
+orders can satisfy that whole hierarchy for every input density.
+
+Let
+
+\[
+P_t=e^{t\Delta/2},\qquad t\geq0,
+\]
+
+be the heat semigroup on \(\mathbb R^d\). Thus \(P_tf\) is the density
+obtained by adding centred Gaussian noise with covariance \(tI_d\). For
+\(\alpha>0\), \(\alpha\ne1\), define
+
+\[
+\tag{1}
+ J_{\alpha,f}(t)=\int_{\mathbb R^d}(P_tf)^\alpha\,\mathrm dx,
+ \qquad
+ S_{\alpha,f}(t)=\frac{1-J_{\alpha,f}(t)}{\alpha-1}.
+\]
+
+At \(\alpha=1\), use the continuous extension
+
+\[
+S_{1,f}(t)=-\int_{\mathbb R^d}(P_tf)\log(P_tf)\,\mathrm dx.
+\]
+
+The property at issue is
+
+\[
+\tag{2}
+ (-1)^{k-1} S_{\alpha,f}^{(k)}(t)\geq0
+ \quad\text{for every }k\geq1\text{ and }t>0.
+\]
+
+The first inequality says that entropy increases under smoothing; the
+second says that its graph is concave. Higher inequalities impose
+additional restrictions that do not follow from these two. Failure of
+the full hierarchy therefore does not by itself refute an established
+low-order sign theorem. Equivalently, \(S_{\alpha,f}'\) is completely
+monotone. Entropy itself need not be nonnegative, so we state the
+derivative inequalities directly. A derivative assertion is understood
+where the relevant entropy is finite and the derivative exists; every
+density constructed here has Gaussian tails and an entropy profile
+analytic in a neighbourhood of the time being used.
+
+Wu, Yu and Guo~\href{https://arxiv.org/abs/2312.01819v4}{{[}1{]}}
+conjectured (2) for every \(\alpha\in(1,2)\), under this heat
+convention, and proved the quadratic case. Their conjecture implies the
+corresponding Shannon conjecture as \(\alpha\to1\). Gu and
+Sellke~\href{https://arxiv.org/abs/2605.11656v1}{{[}2{]}} subsequently
+disproved the Shannon conjecture by a certified finite atomic example
+and also proved the existence of log-concave counterexamples. Zou, Fan,
+Gao and Wang~\href{https://arxiv.org/abs/2608.30275v1}{{[}3{]}} then
+gave an explicit smooth strictly log-concave Shannon family, using two
+interacting Fourier modes localised by a Gaussian envelope.
+
+Earlier results also delimit the scope of the question. Wu, Yu and
+Guo~\href{https://arxiv.org/abs/2312.01819v4}{{[}1, Example 2{]}}
+reported failures for the pairs
+\((k,\alpha)=(3,33),(4,8),(5,5),(6,4),(9,3)\) using a symmetric
+two-point input. Wu and
+Yu~\href{https://arxiv.org/abs/2504.01837v2}{{[}4, Section III-B and
+Appendix B{]}} established related low-order signs and conditional
+implications, and gave the quadratic identity in arbitrary dimension.
+Sun~\href{https://arxiv.org/abs/2601.12944v3}{{[}5{]}} proved concavity
+of Tsallis entropy for \(\alpha\in(0,3]\) in dimension one and for
+\(\alpha\in[1,3]\) in higher dimensions. These lower-order conclusions
+are consistent with the higher-derivative failures proved here.
+
+These results already preclude the entire interval conjecture from being
+true: strict failure for Shannon entropy and continuity in \(\alpha\)
+produce failures at some orders close to \(1\). The question treated
+here is sharper: \emph{which individual positive orders can satisfy (2)
+universally?} Our answer is that only \(\alpha=2\) survives, even if the
+universal quantifier is restricted to smooth strictly positive strictly
+log-concave densities with Gaussian tails.
+
+The mechanism of the proof is adapted directly
+from~\href{https://arxiv.org/abs/2608.30275v1}{{[}3{]}}, and we credit
+that source throughout. The additional steps are the explicit tuning of
+the second Fourier amplitude for an arbitrary fixed Tsallis order, and a
+transfer estimate for the power moment, whose Gaussian scaling factor is
+absent from the Shannon periodic term. The certified finite example is a
+separate concrete witness; it is not a claim about the least possible
+derivative order.
+
+\textbf{Theorem 1} (Sharp universal classification). Fix a dimension
+\(d\geq1\). The only \(\alpha>0\) for which (2) holds for every smooth
+strictly positive strictly log-concave probability density with Gaussian
+tails on \(\mathbb R^d\) is \(\alpha=2\).
+
+For \(\alpha=2\), the inequalities hold, more generally, for every
+probability density and every positive time. For each \(\alpha\ne2\), a
+density in the stated smaller class violates a strict inequality at a
+positive time.
+
+The construction for \(\alpha\notin\{1,2\}\) is explicit. Fix such an
+\(\alpha\), and set
+
+\[
+\tag{3}
+ P_\alpha=(\alpha-3)(\alpha-4)(\alpha-5),\qquad
+ B_\alpha=\operatorname{sgn}(2-\alpha)-\frac{P_\alpha}{288}.
+\]
+
+For integers \(m\geq1\), put
+
+\[
+\tag{4}
+ a_m=2^{-m/4},\qquad b_m=B_\alpha2^{-m}=B_\alpha a_m^4,
+ \qquad \kappa_m=8a_m,
+\]
+
+and, whenever the periodic factor is positive, define
+
+\[
+\tag{5}
+ f_{\alpha,m}(x)=Z_{\alpha,m}^{-1}e^{-\kappa_m x^2/2}
+       (1+a_m\cos x+b_m\cos2x),\qquad x\in\mathbb R.
+\]
+
+The exact normalising constant is
+
+\[
+\tag{6}
+ Z_{\alpha,m}=\sqrt{\frac{2\pi}{\kappa_m}}\,\Xi_{\alpha,m},
+ \qquad
+ \Xi_{\alpha,m}=1+a_me^{-1/(2\kappa_m)}+b_me^{-2/\kappa_m}.
+\]
+
+The index \(m\) specifies both the density and the derivative order.
+
+\textbf{Theorem 2} (Explicit log-concave family). Fix \(\alpha>0\),
+\(\alpha\notin\{1,2\}\), and let (3)--(6) hold. For every sufficiently
+large \(m\), \(f_{\alpha,m}\) is a smooth strictly positive strictly
+log-concave probability density with Gaussian tails. Define
+
+\[
+\tag{7}
+ \beta=\frac{3}{2\sqrt2}>1,\qquad
+ C_{\alpha,m}=\alpha^{-1/2}
+       \left(\frac{\kappa_m}{2\pi}\right)^{(\alpha-1)/2}
+       \Xi_{\alpha,m}^{-\alpha}>0.
+\]
+
+Then
+
+\[
+\tag{8}
+ \frac{(-1)^{m-1}S_{\alpha,f_{\alpha,m}}^{(m)}(0)}{C_{\alpha,m}}
+ =-\frac{\alpha|\alpha-2|}{8}\,\beta^m+o_\alpha(\beta^m)
+ \qquad(m\to\infty).
+\]
+
+In particular, for each sufficiently large \(m\), the signed derivative
+is negative at zero and at every sufficiently small positive time.
+
+All asymptotic statements in this theorem hold for a \emph{fixed}
+\(\alpha\). No uniformity as \(\alpha\to1\), \(\alpha\to2\),
+\(\alpha\to0\) or \(\alpha\to\infty\) is asserted.
+
+\clearpage
+\subsection{Witness map and proof
+roadmap}\label{witness-map-and-proof-roadmap}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Construction
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Entropy order and derivative
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Shape and scope
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Theorem 2 & Each fixed \(\alpha\notin\{1,2\}\); all sufficiently large
+\(m\) & A different smooth strictly log-concave density for each \(m\);
+threshold not quantified \\
+Inherited Shannon theorem & \(\alpha=1\); all sufficiently large \(m\) &
+The cited log-concave family, with density depending on \(m\) \\
+Theorem 7 & \(\alpha=3/2\), derivative \(13\), time \(1/50\) & One
+specified smooth positive density; no log-concavity or least-order
+claim \\
+\end{longtable}
+}
+
+The periodic calculation first arranges a negative coefficient at one
+spectral level. Repeated differentiation amplifies that level faster
+than all others. Gaussian localisation then turns the periodic
+perturbation into an integrable probability density, while controlling
+the errors even after the large number of derivatives. The quadratic
+case is different: its power integral is a nonnegative Fourier-weighted
+mixture of decaying exponentials. The finite witness later replaces an
+unspecified asymptotic threshold by exact rational bounds for one order
+and time.
+
+\section{The periodic calculation}\label{the-periodic-calculation}
+
+For a periodic integrable function, write
+
+\[
+\left\langle F\right\rangle_{\mathbb T}=\frac1{2\pi}\int_0^{2\pi}F(x)\,\mathrm dx.
+\]
+
+Define
+
+\[
+\tag{9}
+ r_m(s,x)=1+a_me^{-s/2}\cos x+b_me^{-2s}\cos2x,
+ \qquad
+ D_{\alpha,m}(s)=\frac{\left\langle r_m(s,\cdot)^\alpha\right\rangle_{\mathbb T}-1}{\alpha-1}.
+\]
+
+This is the periodic part of the negative Tsallis entropy. The heat
+exponents and the choice of amplitudes in (4) follow the spectral
+construction in~\href{https://arxiv.org/abs/2608.30275v1}{{[}3{]}}.
+
+\textbf{Lemma 3} (Periodic asymptotic). For every fixed \(\alpha>0\),
+\(\alpha\notin\{1,2\}\),
+
+\[
+\tag{10}
+ (-1)^mD_{\alpha,m}^{(m)}(0)
+ =-\frac{\alpha|\alpha-2|}{8}\,\beta^m+O_\alpha(1).
+\]
+
+Moreover, the absolute sum of the differentiated monomial expansion is
+\(O_\alpha(\beta^m)\).
+
+\emph{Proof.} For large \(m\), \(a_m+|b_m|<1/2\). Expanding the analytic
+function \((1+u)^\alpha\) around \(u=0\), using that the linear term has
+zero circle mean, gives
+
+\[
+\tag{11}
+ D_{\alpha,m}(s)=
+ \sum_{\substack{p,q\geq0\\p+q\geq2}}
+  \Gamma_{p,q}(\alpha)\,a_m^p b_m^q e^{-(p+4q)s/2},
+\]
+
+where
+
+\[
+\tag{12}
+ \Gamma_{p,q}(\alpha)=
+ \frac{\binom\alpha{p+q}}{\alpha-1}
+ \binom{p+q}{p}\left\langle \cos^p x\cos^q2x\right\rangle_{\mathbb T}.
+\]
+
+For each fixed \(m\), this series can be differentiated \(m\) times near
+zero: at total degree \(\ell=p+q\), the time factor contributes at most
+\((2\ell)^m\), whereas the remaining absolute sum is bounded by a fixed
+geometric factor times a binomial-series coefficient. Taking \(m\) large
+enough that \(a_m+|b_m|\) is smaller than a fixed analytic radius yields
+an absolutely convergent differentiated series.
+
+The substitution \(x\mapsto\pi-x\) shows that the trigonometric average
+in (12) vanishes for odd \(p\). Write \(p=2h\) and set \(j=h+2q\). Then
+
+\[
+\frac{p+4q}{2}=j,\qquad
+ a_m^{2h}b_m^q=B_\alpha^q2^{-mj/2}.
+\]
+
+Consequently,
+
+\[
+\tag{13}
+ (-1)^m D_{\alpha,m}^{(m)}(0)
+ =\sum_{j\geq1} A_j(\alpha)\beta_j^m,
+ \qquad
+ \beta_j=j2^{-j/2},
+\]
+
+where
+
+\[
+A_j(\alpha)=
+ \sum_{\substack{h,q\geq0\\h+2q=j\\2h+q\geq2}}
+    \Gamma_{2h,q}(\alpha)B_\alpha^q.
+\]
+
+The ratio \(\beta_{j+1}/\beta_j=(j+1)/(j\sqrt2)\) shows that \(j=3\) is
+the unique maximum. Specifically, \(\beta_2=\beta_4=1\),
+\(\beta_3=\beta\), and \(\beta_j<1\) for every \(j\notin\{2,3,4\}\).
+
+There are exactly two pairs at level \(j=3\): \((p,q)=(2,1)\) and
+\((6,0)\). Since
+
+\[
+\left\langle \cos^2x\cos 2x\right\rangle_{\mathbb T}=\frac14,\qquad
+ \left\langle \cos^6x\right\rangle_{\mathbb T}=\frac5{16},
+\]
+
+their sum is
+
+\[
+\begin{aligned}
+ A_3(\alpha)
+ &=\frac34\frac{\binom\alpha3}{\alpha-1}B_\alpha
+   +\frac5{16}\frac{\binom\alpha6}{\alpha-1}\\
+ &=\frac{\alpha(\alpha-2)}8 B_\alpha
+   +\frac{\alpha(\alpha-2)(\alpha-3)(\alpha-4)(\alpha-5)}{2304}
+   =-\frac{\alpha|\alpha-2|}{8}.
+\end{aligned}\tag{14}
+\]
+
+This is the only order-dependent tuning needed to obtain a negative
+leading coefficient.
+
+For completeness, we control the infinite sum. Analyticity of
+
+\[
+\frac{(1+u)^\alpha-1-\alpha u}{\alpha-1}
+\]
+
+on \(|u|<1\) implies, by a Cauchy estimate on \(|u|=1/2\), that
+
+\[
+\left|\frac{\binom\alpha\ell}{\alpha-1}\right|
+ \leq K_\alpha2^\ell,\qquad \ell\geq2.
+\]
+
+At level \(j\) there are at most \(j+1\) pairs and \(\ell=2j-3q\leq2j\).
+Therefore the sum \(\mathcal A_j\) of the absolute monomial coefficients
+at that level satisfies
+
+\[
+\tag{15}
+ |A_j|\leq\mathcal A_j\leq
+ K_\alpha(j+1)R_\alpha^j,
+ \qquad R_\alpha=16\max\{1,|B_\alpha|\}^2.
+\]
+
+For \(j\geq16\), one has \(j\leq2^{j/4}\), hence
+\(\beta_j\leq2^{-j/4}\). Choose an integer \(m_0\) with
+\(R_\alpha2^{-m_0/4}<1\). Then
+
+\[
+\sum_{j\geq16}\mathcal A_j\beta_j^m
+ \leq K_\alpha\sum_{j\geq16}(j+1)
+       (R_\alpha2^{-m_0/4})^j<\infty,
+ \qquad m\geq m_0,
+\]
+
+uniformly in \(m\). The finitely many levels \(j\leq15\), \(j\ne3\),
+contribute \(O_\alpha(1)\). Equation (14) proves (10); retaining
+absolute values proves the last assertion.~\(\square\)
+
+\section{Gaussian localisation for power
+moments}\label{gaussian-localisation-for-power-moments}
+
+We now adapt the exact localisation method
+in~\href{https://arxiv.org/abs/2608.30275v1}{{[}3{]}} to
+\(J_{\alpha,f}\). Throughout this section, \(\alpha>0\),
+\(\alpha\notin\{1,2\}\), is fixed, and the subscript \(m\) is sometimes
+suppressed.
+
+\subsection{Positivity and strict
+log-concavity}\label{positivity-and-strict-log-concavity}
+
+For sufficiently large \(m\), \(a_m+|b_m|\leq1/2\) and
+\(|b_m|\leq a_m/8\). A simple sufficient condition is \(a_m\leq1/4\)
+together with \(|B_\alpha|a_m^3\leq1/8\). If
+
+\[
+\rho_m(x)=1+a_m\cos x+b_m\cos2x,
+\]
+
+then \(\rho_m\geq1/2\) and \(|\rho_m''|\leq a_m+4|b_m|\leq3a_m/2\).
+Therefore
+
+\[
+(\log\rho_m)''=\frac{\rho_m''}{\rho_m}
+   -\frac{(\rho_m')^2}{\rho_m^2}\leq3a_m,
+\]
+
+and
+
+\[
+\tag{16}
+ (\log f_{\alpha,m})''=-\kappa_m+(\log\rho_m)''
+ \leq-5a_m<0.
+\]
+
+The remaining regularity and tail properties follow immediately from (5)
+and the bounds on \(\rho_m\).
+
+\subsection{Exact heat evolution}\label{exact-heat-evolution}
+
+For \(\kappa>0\) and \(n\in\mathbb Z\), completing the square in the
+Gaussian convolution gives the identity
+from~\href{https://arxiv.org/abs/2608.30275v1}{{[}3, Lemma 3{]}}:
+
+\[
+\tag{17}
+ P_t\big(e^{-\kappa x^2/2}e^{inx}\big)
+ =(1+\kappa t)^{-1/2}
+  e^{-\kappa x^2/(2(1+\kappa t))}
+  e^{-n^2t/(2(1+\kappa t))}e^{inx/(1+\kappa t)}.
+\]
+
+Indeed, the exponent in the convolution integrand is
+
+\[
+-\frac{1+\kappa t}{2t}
+   \left(y-\frac{x+int}{1+\kappa t}\right)^2
+ -\frac{\kappa x^2}{2(1+\kappa t)}
+ -\frac{n^2t}{2(1+\kappa t)}+\frac{inx}{1+\kappa t},
+\]
+
+and Gaussian integration proves (17) for \(t>0\), with continuity at
+zero.
+
+Set
+
+\[
+\tag{18}
+ d_m(t)=1+\kappa_mt,\qquad
+ \tau_m(t)=\frac{t}{d_m(t)},\qquad
+ \lambda_m(t)=\alpha\kappa_m d_m(t),\qquad
+ \nu=\frac{1-\alpha}{2}.
+\]
+
+Applying (17) to the three modes in (5) yields
+
+\[
+\tag{19}
+ P_tf_{\alpha,m}(x)=Z_{\alpha,m}^{-1}d_m(t)^{-1/2}
+ e^{-\kappa_mx^2/(2d_m(t))}
+ r_m\!\left(\tau_m(t),\frac{x}{d_m(t)}\right).
+\]
+
+For real \(\lambda>0\), let \(\langle\cdot\rangle_\lambda\) denote
+expectation under the centred Gaussian law of precision \(\lambda\).
+Changing variables \(x=d_m(t)y\) in the power integral gives the scalar
+identity
+
+\[
+Z_{\alpha,m}^{-\alpha}d_m(t)^{1-\alpha/2}
+ \sqrt{\frac{2\pi}{\alpha\kappa_m d_m(t)}}
+ =C_{\alpha,m}d_m(t)^{(1-\alpha)/2}.
+\]
+
+Consequently,
+
+\[
+\tag{20}
+ J_{\alpha,f_{\alpha,m}}(t)
+ =C_{\alpha,m}d_m(t)^\nu
+  \left\langle r_m(\tau_m(t),\cdot)^\alpha
+  \right\rangle_{\lambda_m(t)}.
+\]
+
+The constant \(C_{\alpha,m}\) is exactly (7); no asymptotic
+normalisation is being substituted here.
+
+\textbf{Lemma 4} (Power-moment transfer). As \(m\to\infty\) with
+\(\alpha\) fixed,
+
+\[
+\tag{21}
+ \frac{(-1)^mJ_{\alpha,f_{\alpha,m}}^{(m)}(0)}
+ {C_{\alpha,m}(\alpha-1)}
+ =(-1)^mD_{\alpha,m}^{(m)}(0)+o_\alpha(\beta^m).
+\]
+
+The profile in (20) has a holomorphic extension to a neighbourhood of
+zero for all sufficiently large \(m\).
+
+\emph{Proof.} We separate Fourier filtering, the scalar Gaussian factor,
+and the time change. A broad Gaussian average suppresses nonconstant
+Fourier modes. The power moment also introduces a scalar Gaussian
+factor, absent from the Shannon periodic term, and a small
+reparametrisation of time. Each contribution must remain smaller than
+the negative \(\beta^m\) scale after taking \(m\) derivatives.
+
+\paragraph{Fourier filtering.}\label{fourier-filtering.}
+
+Use the complex time disk \(|t|\leq1/2\) and the spatial strip
+\(|\operatorname{Im}y|\leq1\). For large \(m\), \(|\kappa_mt|\leq1/4\),
+\(|\tau_m(t)|\leq1\), and
+
+\[
+\left|a_me^{-\tau_m(t)/2}\cos y+
+       b_me^{-2\tau_m(t)}\cos2y\right|<\frac12
+\]
+
+on this product domain. Consequently
+
+\[
+G_m(t,y)=r_m(\tau_m(t),y)^\alpha
+\]
+
+is defined there by the principal power and is holomorphic and uniformly
+bounded, with a bound depending only on \(\alpha\). Its Fourier
+coefficients satisfy
+
+\[
+\tag{22}
+ |\widehat G_m(n,t)|\leq K_\alpha e^{-|n|}.
+\]
+
+For complex \(\lambda\) with positive real part, the Gaussian bracket
+has a holomorphic extension, using the principal square root, and
+
+\[
+\left\langle e^{iny}\right\rangle_\lambda=e^{-n^2/(2\lambda)}.
+\]
+
+Since \(|d_m(t)-1|\leq1/4\),
+
+\[
+\operatorname{Re}\frac1{\lambda_m(t)}
+ =\frac1{\alpha\kappa_m}\operatorname{Re}\frac1{d_m(t)}
+ \geq\frac1{3\alpha\kappa_m}.
+\]
+
+Normal convergence of the Fourier series permits termwise integration.
+Equations (22) and the preceding estimate imply
+
+\[
+\tag{23}
+ \left|
+ \langle G_m(t,\cdot)\rangle_{\lambda_m(t)}
+       -\left\langle G_m(t,\cdot)\right\rangle_{\mathbb T}\right|
+ \leq K_\alpha e^{-c_\alpha/\kappa_m}
+ \qquad(|t|\leq1/2),
+\]
+
+where one may take \(c_\alpha=1/(6\alpha)\). The same estimate, with
+another constant, holds after multiplying by \(d_m(t)^\nu/(\alpha-1)\).
+Cauchy's estimate bounds the resulting \(m\)th derivative at zero by
+
+\[
+K_\alpha 2^m m! e^{-c_\alpha/\kappa_m}=o_\alpha(\beta^m),
+\]
+
+because \(1/\kappa_m=2^{m/4}/8\). This construction also supplies the
+stated holomorphic extension, agreeing with (20) on real nonnegative
+times.
+
+\paragraph{The constant periodic
+mode.}\label{the-constant-periodic-mode.}
+
+The zero Fourier coefficient is
+
+\[
+\left\langle G_m(t,\cdot)\right\rangle_{\mathbb T}=1+(\alpha-1)D_{\alpha,m}(\tau_m(t)).
+\]
+
+Thus, after division by \(\alpha-1\), the constant term contributes
+\(d_m(t)^\nu/(\alpha-1)\). Its \(m\)th derivative has absolute value at
+most
+
+\[
+\frac{(|\nu|+m)^m\kappa_m^m}{|\alpha-1|}
+ =\exp\{-\tfrac14(\log2)m^2+O_\alpha(m\log m)\}
+ =o_\alpha(\beta^m).
+\]
+
+\paragraph{Time change and the remaining scalar
+factor.}\label{time-change-and-the-remaining-scalar-factor.}
+
+We use a uniform estimate for each spectral mode. For \(L\geq1\) and
+integer \(n\geq1\), define
+
+\[
+T_n(L,\kappa)=
+ (-1)^n\left.\frac{\,\mathrm d^n}{\,\mathrm dt^n}
+        e^{-Lt/(1+\kappa t)}\right|_{t=0}.
+\]
+
+Expanding the exponential and then \((1+\kappa t)^{-\ell}\) yields
+
+\[
+\tag{24}
+ T_n(L,\kappa)=
+ \sum_{r=0}^{n-1}\frac{n!}{(n-r)!}
+       \binom{n-1}{r}\kappa^r L^{n-r},
+ \qquad T_0(L,\kappa)=1.
+\]
+
+This identity and the associated estimate are the time-change
+calculation of~\href{https://arxiv.org/abs/2608.30275v1}{{[}3{]}}. Every
+term is nonnegative, and
+
+\[
+\tag{25}
+ 1\leq T_n(L,\kappa)/L^n\leq e^{n^2\kappa/L}
+ \quad(n\geq0),
+\]
+
+where the lower bound for \(n=0\) is an equality.
+
+For the extra factor required by the power moment, put
+
+\[
+U_m(L,\kappa)=(-1)^m\left.\frac{\,\mathrm d^m}{\,\mathrm dt^m}
+  \left[(1+\kappa t)^\nu e^{-Lt/(1+\kappa t)}\right]\right|_{t=0}.
+\]
+
+Leibniz' rule gives
+
+\[
+U_m=
+ \sum_{k=0}^m\binom mk(-1)^k(\nu )_{\underline{k}}\kappa^k
+       T_{m-k}(L,\kappa).
+\]
+
+Using \(|(\nu )_{\underline{k}}|\leq(|\nu|+m)^k\),
+\(\binom mk\leq m^k/k!\), and (25), we obtain
+
+\[
+\tag{26}
+ \left|\frac{U_m(L,\kappa)}{L^m}-1\right|
+ \leq
+ \exp\!\left(\frac{(2m^2+|\nu|m)\kappa}{L}\right)-1.
+\]
+
+For clarity, the \(k=0\) term contributes at most \(e^{m^2\kappa/L}-1\)
+to this difference; the sum over \(k\geq1\) is at most
+
+\[
+e^{m^2\kappa/L}
+   \big(e^{m(|\nu|+m)\kappa/L}-1\big),
+\]
+
+whose sum is (26).
+
+For \(\kappa=\kappa_m\), the right side of (26) is \(o(1)\) uniformly in
+\(L\geq1\). The periodic expansion can be written
+
+\[
+D_{\alpha,m}(s)=\sum_{j\geq1}A_j(\alpha)2^{-mj/2}e^{-js}.
+\]
+
+Apply (26) with \(L=j\) and use the absolute-sum estimate in Lemma~3. It
+follows that
+
+\[
+(-1)^m\left.\frac{\,\mathrm d^m}{\,\mathrm dt^m}
+       [d_m(t)^\nu D_{\alpha,m}(\tau_m(t))]\right|_{t=0}
+ =(-1)^mD_{\alpha,m}^{(m)}(0)+o_\alpha(\beta^m).
+\]
+
+Termwise differentiation is justified by the same absolutely convergent
+monomial series as in Lemma~3, or by (15) and (26). Combining the three
+estimates proves (21).~\(\square\)
+
+\emph{Proof of Theorem~2.} Positivity, Gaussian tails, smoothness and
+strict log-concavity were proved in (16). From (1),
+
+\[
+(-1)^{m-1}S_{\alpha,f}^{(m)}(t)
+ =\frac{(-1)^mJ_{\alpha,f}^{(m)}(t)}{\alpha-1}.
+\]
+
+Combine Lemmas~3 and~4 to obtain (8). Its leading coefficient is
+strictly negative. The holomorphic extension in Lemma~4 gives continuity
+of the \(m\)th derivative at zero, so the strict sign persists for a
+sufficiently small interval of positive times.~\(\square\)
+
+\section{The quadratic case, Shannon order and higher
+dimensions}\label{the-quadratic-case-shannon-order-and-higher-dimensions}
+
+\textbf{Proposition 5} (The quadratic case). For any probability density
+\(f\) on \(\mathbb R^d\), \(t>0\) and integer \(k\geq1\),
+
+\[
+\tag{27}
+ (-1)^{k-1}S_{2,f}^{(k)}(t)
+ =\frac1{(2\pi)^d}\int_{\mathbb R^d}|\xi|^{2k}
+    |\widehat f(\xi)|^2e^{-t|\xi|^2}\,\mathrm d\xi\geq0.
+\]
+
+In dimension one this equals
+\(\int_\mathbb R|\partial_x^kP_tf|^2\,\mathrm dx\).
+
+\emph{Proof.} Use the Fourier convention
+\(\widehat f(\xi)=\int e^{-ix\cdot\xi}f(x)\,\mathrm dx\). Since
+\(|\widehat f|\leq1\) and \(\widehat{P_tf}=e^{-t|\xi|^2/2}\widehat f\),
+Plancherel's identity gives
+
+\[
+J_{2,f}(t)=\frac1{(2\pi)^d}\int|\widehat f(\xi)|^2e^{-t|\xi|^2}\,\mathrm d\xi.
+\]
+
+Gaussian domination permits differentiation of every order at positive
+times. Since \(S_{2,f}=1-J_{2,f}\), (27) follows. This reproves the
+quadratic fact in~\href{https://arxiv.org/abs/2312.01819v4}{{[}1{]}} and
+its arbitrary-dimensional version
+in~\href{https://arxiv.org/abs/2504.01837v2}{{[}4, Appendix
+B{]}}.~\(\square\)
+
+At the Shannon order, we use the already established theorem of Zou et
+al.~\href{https://arxiv.org/abs/2608.30275v1}{{[}3, Theorem 1{]}}. With
+\(a_m=2^{-m/4}\), \(b_m=2^{-m}\) and \(\kappa_m=8a_m\), their density
+(5) is smooth, strictly positive and strictly log-concave for
+\(m\geq5\), and
+
+\[
+\tag{28}
+ (-1)^{m-1}S_{1,f_m}^{(m)}(0)
+ =-\frac{11}{96}\beta^m+o(\beta^m).
+\]
+
+Their analytic construction also gives failure at small positive times.
+Equation (28) is quoted from prior work, not asserted as a new case of
+our result. Together with Theorem~2 and Proposition~5, it proves
+Theorem~1 in dimension one.
+
+\textbf{Corollary 6} (Every dimension). For every \(d\geq2\) and
+\(\alpha>0\), \(\alpha\ne2\), there is a smooth strictly positive
+strictly log-concave probability density with Gaussian tails on
+\(\mathbb R^d\) for which (2) fails.
+
+\emph{Proof.} First take a one-dimensional density \(f\), a derivative
+order \(k\), and a positive time \(t_0\) with a strict negative signed
+derivative, as obtained above. Let \(g_R\) be the centred Gaussian
+density of covariance \(RI_{d-1}\) and use \(f\otimes g_R\). Strict
+log-concavity and the other stated regularity properties are preserved.
+
+For \(\alpha\ne1\), the power moments factor, and
+
+\[
+J_{\alpha,g_R}(t)=K_{\alpha,R,d}
+  (1+t/R)^{-(d-1)(\alpha-1)/2},
+\]
+
+where \(K_{\alpha,R,d}>0\) is independent of time. The factor following
+\(K_{\alpha,R,d}\) tends to \(1\) in \(C^k\) on every compact time
+interval as \(R\to\infty\). Consequently the signed \(k\)th derivative
+of \(S_{\alpha,f\otimes g_R}\), after division by \(K_{\alpha,R,d}\),
+converges at \(t_0\) to the strictly negative signed derivative for
+\(f\). It is therefore negative for sufficiently large \(R\).
+
+For \(\alpha=1\), Shannon entropy is additive, and the Gaussian summand
+contributes
+
+\[
+(-1)^{k-1}S_{1,g_R}^{(k)}(t_0)
+ =\frac{d-1}{2}\frac{(k-1)!}{(R+t_0)^k}\longrightarrow0.
+\]
+
+Thus the strict negative sign is again preserved for large \(R\).
+Combining this corollary with Proposition~5 completes Theorem~1 in every
+dimension.~\(\square\)
+
+\section{\texorpdfstring{A completely specified witness at order
+\(\alpha=3/2\)}{A completely specified witness at order \textbackslash alpha=3/2}}\label{a-completely-specified-witness-at-order-alpha32}
+
+The asymptotic family proves the classification and the log-concave
+strengthening, but it does not give a numerical threshold for \(m\) at
+each \(\alpha\). The following separate construction gives a finite
+certificate at derivative order \(13\) for the open-interval order
+\(\alpha=3/2\).
+
+\textbf{Theorem 7} (Finite real-line witness). Let \(R=2^{40}\) and let
+\(\gamma_R\) denote the centred Gaussian density of variance \(R\). Set
+
+\[
+\tag{29}
+ \begin{aligned}
+ f_R(x)&=\frac{\gamma_R(x)}{Z_R}
+    \left(1+\frac1{10}\cos x+\frac1{32000}\cos2x\right),\\
+ Z_R&=1+\frac1{10}e^{-R/2}+\frac1{32000}e^{-2R}.
+ \end{aligned}
+\]
+
+This is a smooth strictly positive probability density with Gaussian
+tails. Under the convention \(P_t=e^{t\Delta/2}\), put
+
+\[
+C_R=(3/2)^{-1/2}(2\pi R)^{-1/4}.
+\]
+
+Then
+
+\[
+\tag{30}
+ S_{3/2,f_R}^{(13)}(1/50)<-\frac{C_R}{1024}<0.
+\]
+
+Since \((-1)^{12}=1\), this violates (2). No log-concavity assertion is
+made for this particular finite witness.
+
+\emph{Proof.} For the finite calculation only, write
+\(Q_t=e^{t\Delta}=P_{2t}\). On the circle define
+
+\[
+v(t,x)=1+ae^{-t}\cos x+be^{-4t}\cos2x,
+ \qquad a=\frac1{10},\quad b=\frac1{32000},\quad
+ F(t)=\left\langle v(t,\cdot)^{3/2}\right\rangle_{\mathbb T}.
+\]
+
+The exact rational certificate in Appendix~A proves
+
+\[
+\tag{31}
+ (-1)^{13}F^{(13)}(1/100)<-6.
+\]
+
+We give all analytic estimates needed to transfer this finite sign to
+(29).
+
+Put \(M_R(t)=\int(Q_tf_R)^{3/2}\,\mathrm dx\), \(d=1+2t/R\) and
+\(\tau=t/d\). The exact window identity gives
+
+\[
+Q_tf_R(x)=Z_R^{-1}\gamma_{Rd}(x)
+  [1+ae^{-\tau}\cos(x/d)+be^{-4\tau}\cos(2x/d)].
+\]
+
+Let \(\widehat V_\ell(s)\) be the Fourier coefficients in \(x\) of
+\(v(s,x)^{3/2}\). Gaussian integration gives
+
+\[
+\tag{32}
+ G_R(t):=\frac{M_R(t)}{C_R}
+ =Z_R^{-3/2}d^{-1/4}
+   \sum_{\ell\in\mathbb Z}\widehat V_\ell(\tau)
+                   e^{-\ell^2R/(3d)}.
+\]
+
+In particular, \(\widehat V_0=F\). The normally convergent Fourier
+expression on the right, rather than a complex power of the real-line
+density, supplies the holomorphic extension used below.
+
+Let \(T=1/100\) and use the disk \(|z-T|\leq1\). The following bounds
+hold for every \(R\geq1024\), hence for the specified \(R\). We have
+\(|z|<11/10\),
+
+\[
+|d-1|\leq\frac{11}{5R},\qquad
+ \operatorname{Re}(1/d)>\frac12,\qquad
+ |\tau-z|\leq\frac{121}{50R(1-11/(5R))}<\frac5{2R}.
+\]
+
+Every point on the segment from \(z\) to \(\tau\) has real part greater
+than \(-11/10\). For \(\operatorname{Re}s\geq-11/10\) and
+\(|\operatorname{Im}x|\leq1\), use
+
+\[
+e^{11/10}<10/3,\qquad e^{22/5}<135,\qquad
+ \cosh1<2,\qquad \cosh2<4.
+\]
+
+For example, the exponential bounds follow from \(e<3\),
+\(e^{1/10}<10/9\) and \(e^{2/5}<5/3\), the last two being immediate
+geometric majorants of the exponential series. Hence
+
+\[
+|ae^{-s}\cos x+be^{-4s}\cos2x|
+ <\frac23+\frac{27}{1600}<\frac34.
+\]
+
+The principal \(3/2\) power is therefore holomorphic on this domain, has
+modulus less than \(3\), and obeys
+
+\[
+|\widehat V_\ell(s)|\leq3e^{-|\ell|}.
+\]
+
+Also \(|F|<3\), and differentiation under the circle average gives
+
+\[
+|F'(s)|\leq\frac32\sqrt{\frac74}
+       \left(\frac23+\frac{27}{400}\right)<2.
+\]
+
+Consequently \(|F(\tau)-F(z)|<5/R\). The nonzero Fourier modes in (32)
+satisfy
+
+\[
+\tag{33}
+ \left|\sum_{\ell\ne0}\widehat V_\ell(\tau)
+                  e^{-\ell^2R/(3d)}\right|
+ <6e^{-R/6}.
+\]
+
+Integration of the derivative of \(w^{-1/4}\) along the segment from
+\(1\) to \(d\) gives
+
+\[
+|d^{-1/4}-1|<\frac{11}{10R},\qquad |d^{-1/4}|<2.
+\]
+
+Furthermore, \(Z_R\geq1\) and
+
+\[
+Z_R-1<\frac{11}{100}e^{-R/2}\leq\frac{11}{100R}.
+\]
+
+Since \(|Z_R^{-3/2}-1|\leq(3/2)(Z_R-1)\), the factor
+\(A=Z_R^{-3/2}d^{-1/4}\) obeys
+
+\[
+|A-1|<\frac2R,\qquad |A|<2.
+\]
+
+For \(R\geq1024\), \(12e^{-R/6}<1/R\): the positive exponential series
+gives \(e^{R/6}>R^3/1296\), and \(R^2>15552\). Writing
+
+\[
+A F(\tau)-F(z)=[F(\tau)-F(z)]+(A-1)F(\tau)
+\]
+
+and using (33), the time-change, scalar-factor and nonzero-mode errors
+are respectively smaller than \(5/R\), \(6/R\) and \(1/R\). We may
+therefore use the generous bound
+
+\[
+\tag{34}
+ \sup_{|z-T|\leq1}|G_R(z)-F(z)|<100/R.
+\]
+
+The Fourier series in (32) converges normally on this disk, so it
+defines a holomorphic function agreeing with \(M_R/C_R\) at real
+nonnegative times. Cauchy's estimate gives
+
+\[
+\tag{35}
+ |G_R^{(13)}(T)-F^{(13)}(T)|
+ <\frac{100\,13!}{2^{40}}
+ =\frac{152026875}{268435456}<1.
+\]
+
+The final comparison is also checked in exact integer arithmetic by the
+accompanying certificate.
+
+Equation (31) says \(F^{(13)}(T)>6\), so (35) implies
+\(M_R^{(13)}(T)/C_R>5\). Finally, \(P_t=Q_{t/2}\), \(t=2T=1/50\), and
+\(S_{3/2,f}=2(1-J_{3/2,f})\). Thus
+
+\[
+J_{3/2,f_R}^{(13)}(1/50)>\frac{5C_R}{8192},
+ \qquad
+ S_{3/2,f_R}^{(13)}(1/50)<-\frac{5C_R}{4096}
+                         <-\frac{C_R}{1024}.
+\]
+
+This proves the claim.~\(\square\)
+
+\section{Dilation and the scale of a
+counterexample}\label{dilation-and-the-scale-of-a-counterexample}
+
+\textbf{Corollary 8} (Elementary dilation consequences). Let \(f\) be a
+one-dimensional density with finite positive variance, and suppose its
+signed entropy derivative of order \(k\geq1\) is strictly negative at a
+positive time \(t_0\). For \(a>0\) define \(f_a(x)=a^{-1}f(x/a)\). Then
+the same signed derivative for \(f_a\) is strictly negative at
+\(a^2t_0\). Consequently a witness can be rescaled to variance one, or
+it can be rescaled to have failure at any prescribed positive time.
+These are separate choices of the single scale parameter.
+
+\emph{Proof.} Gaussian convolution and the substitution \(x=ay\) give
+\[
+P_t f_a(x)=a^{-1}(P_{t/a^2}f)(x/a).
+\]
+For \(\alpha\ne1\) this implies
+\[
+J_{\alpha,f_a}(t)=a^{1-\alpha}J_{\alpha,f}(t/a^2),
+\]
+\[
+(-1)^{k-1}S_{\alpha,f_a}^{(k)}(t)
+=a^{1-\alpha-2k}(-1)^{k-1}S_{\alpha,f}^{(k)}(t/a^2).
+\]
+The multiplicative factor is positive. For \(\alpha=1\),
+\(S_{1,f_a}(t)=S_{1,f}(t/a^2)+\log a\), so the derivative factor is
+\(a^{-2k}\), again positive. Variance transforms as
+\(\operatorname{Var}(f_a)=a^2\operatorname{Var}(f)\). Thus
+\(a=\operatorname{Var}(f)^{-1/2}\) gives variance one, whereas
+\(a=(T/t_0)^{1/2}\) places failure at a prescribed \(T>0\).
+
+Smoothness, strict positivity and Gaussian tails are preserved by
+dilation. If \(f\) is strictly log-concave, then
+\(\log f_a(x)=\log f(x/a)-\log a\) is strictly concave by affine composition.
+For the constructed family its negative curvature transforms by
+\((\log f_a)''(x)=a^{-2}(\log f)''(x/a)\). The constructed densities have finite positive variance.
+This proves the conclusions. \(\square\)
+
+This corollary is a standard heat-scaling consequence, not a new
+localisation mechanism. The ratio of failure time to variance is
+unchanged: the two quantities cannot be prescribed independently.
+Dilation does not supply a log-concavity claim for the finite witness
+and does not establish a uniform curvature bound across the asymptotic
+family.
+
+\section{What the classification
+establishes}\label{what-the-classification-establishes}
+
+Theorem~1 settles the universal order question, including each
+individual order in \((1,2)\). The exception at \(\alpha=2\) reflects
+the quadratic Fourier representation (27). For \(\alpha\notin\{1,2\}\),
+the power-entropy expansion has a nonzero cubic contribution; the second
+harmonic can be chosen to make the combined dominant spectral
+coefficient negative. The Shannon case is supplied separately by its
+cited entropy expansion. The sixth-order contribution at the same
+spectral level is retained exactly in (14), rather than discarded as a
+lower-order perturbation.
+
+The bounds are pointwise in \(\alpha\). In the displayed family, the
+sufficient curvature lower bound \(5a_m\) tends to zero; no uniform
+curvature or variance bound across that family is claimed. Dilation
+gives a different normalization of each witness, not a freely chosen
+physical noise scale.
+
+The result does not determine the first derivative order at which a
+particular \(\alpha\) admits failure. The asymptotic family establishes
+existence with strong regularity and shape restrictions, while the
+order-\(13\) witness gives one reproducible finite example. Neither
+construction estimates a physically typical noise level. The method and
+its limitations are inherited in substantial part from the Shannon
+construction of~\href{https://arxiv.org/abs/2608.30275v1}{{[}3{]}}; the
+contribution here is the complete positive-order classification and the
+accompanying power-moment and finite-certificate details.
+
+\section*{Appendix A. Exact rational circle
+certificate}\label{exact-rational-circle-certificate}
+
+This appendix explains the finite certificate used in (31). It involves
+no floating-point sign decision. Let
+
+\[
+\mathcal F(z)=\left\langle (1+az\cos x+bz^4\cos 2x)^{3/2}\right\rangle_{\mathbb T}
+             =\sum_{k\geq0}c_kz^k,
+ \qquad a=1/10,\quad b=1/32000.
+\]
+
+Then \(F(t)=\mathcal F(e^{-t})\). The coefficients are rational and can
+be computed as
+
+\[
+\tag{36}
+ c_k=\sum_{i+4j=k}
+ \binom{3/2}{i+j}\binom{i+j}{i}a^ib^j
+      \left\langle \cos^i x\cos^j2x\right\rangle_{\mathbb T}.
+\]
+
+The moments in this formula are exactly
+
+\[
+\left\langle \cos^i x\cos^j2x\right\rangle_{\mathbb T}
+ =2^{-(i+j)}
+  \sum_{\substack{0\leq r\leq i,\,0\leq s\leq j\\
+           i-2r+2(j-2s)=0}}\binom ir\binom js.
+\]
+
+Odd coefficients vanish by the substitution \(x\mapsto\pi-x\). The
+script computes every coefficient through degree \(23\); the first four
+nonzero coefficients after \(c_0=1\) are
+
+\[
+c_2=\frac3{1600},\quad
+ c_4=\frac9{10240000},\quad
+ c_6=-\frac{41}{3276800000},\quad
+ c_8=\frac{12213}{83886080000000}.
+\]
+
+At derivative order \(13\) and time \(T=1/100\),
+
+\[
+\tag{37}
+ (-1)^{13}F^{(13)}(T)=\sum_{k\geq1}c_k k^{13}e^{-kT}.
+\]
+
+For the infinite tail, use the analytic radius \(\rho=8\). Since
+
+\[
+a\rho+b\rho^4=\frac{116}{125}<1,
+ \qquad (1+116/125)^3<3^2,
+\]
+
+the principal power is analytic for \(|z|\leq8\) and
+\(|\mathcal F(z)|<3\) there. Thus \(|c_k|\leq3\,8^{-k}\). The ratio of
+successive even Cauchy majorants for \(k\geq24\) is at most
+
+\[
+q=\frac{(13/12)^{13}}{64}<1.
+\]
+
+Since \(e^{-kT}\leq1\), the absolute tail in (37) is bounded by
+
+\[
+\tag{38}
+ H=\frac{3\,24^{13}}{8^{24}(1-q)}<\frac1{1000}.
+\]
+
+To bound the finite sum with rational arithmetic, bracket
+\(E=e^{1/100}\) by
+
+\[
+E_-=\sum_{j=0}^{12}\frac{(1/100)^j}{j!},
+ \qquad
+ E_+=E_-+\frac{(1/100)^{13}/13!}{1-1/1400}.
+\]
+
+The omitted positive Taylor terms have successive ratio at most
+\(1/1400\). Therefore the finite sum in (37) is at most
+
+\[
+B=
+ \sum_{\substack{2\leq k\leq22\\ k\ \mathrm{even}\\c_k\geq0}}
+       \frac{c_k k^{13}}{E_-^k}
+ +
+ \sum_{\substack{2\leq k\leq22\\ k\ \mathrm{even}\\c_k<0}}
+       \frac{c_k k^{13}}{E_+^k}.
+\]
+
+The script checks the exact rational inequalities
+
+\[
+B<-\frac{27}{4},\qquad H<\frac1{1000}.
+\]
+
+Consequently
+
+\[
+(-1)^{13}F^{(13)}(1/100)\leq B+H
+ <-\frac{6749}{1000}<-6,
+\]
+
+which proves (31). The readable diagnostic for \(B+H\) is approximately
+\(-6.753909793468304\); it is not used to decide the sign.
+
+The file \texttt{checks/tsallis\_order13\_certificate.py} contains the
+exact certificate. It computes the coefficients, verifies the
+analytic-bound hypotheses and finite rational inequalities, and checks
+the integer comparison in (35) and the final entropy margin.
+The companion \texttt{checks/test\_guards.py} checks intended failures.
+Each accepts \texttt{--output NEW\_PATH.json} and refuses to overwrite
+an existing receipt.
+The mathematical certificate above is complete without the source
+listing. Executable acceptance uses explicit named guards rather than
+removable assertions; see \texttt{VERIFICATION.md} for the exact
+invocation, positive and intended-failure checks, interpreter modes and
+artifact identities. Arithmetic success verifies only the finite
+comparisons, not the analytic convolution, Fourier or Cauchy arguments.
+
+\section*{Declarations}\label{declarations}
+
+\textbf{Data and code availability.} This theoretical study uses no
+empirical dataset. The complete mathematical certificate is included
+above; the accompanying public package contains its executable checker
+and verification documentation.
+
+\textbf{AI assistance and research status.} AI systems assisted the
+analysis, manuscript revision and internal checks. This is an unrefereed
+candidate, not external human peer review, unaffiliated reproduction or
+proof-assistant verification.
+
+\textbf{Contributions.} Anonymous authorship is retained. The work
+comprises mathematical analysis, software, validation and writing; no
+individual human CRediT allocation is asserted from the available
+record.
+
+\textbf{Funding and competing interests.} No funding or
+competing-interest information was supplied with the research record;
+absence of a declaration is not a verified assertion that none exists.
+
+\textbf{Ethics.} No human participants, animal research or personal data
+are involved in the mathematical material presented.
+
+\section*{References}\label{references}
+
+\paragraph{{[}1{]}}\label{section}
+
+H. Wu, L. Yu and L. Guo, \emph{On the Complete Monotonicity of Rényi
+Entropy}, IEEE Transactions on Information Theory \textbf{71}(7) (2025),
+4895--4914.
+\href{https://doi.org/10.1109/TIT.2025.3561384}{doi:10.1109/TIT.2025.3561384}.
+\href{https://arxiv.org/abs/2312.01819v4}{arXiv:2312.01819}. The Tsallis
+conjecture is Conjecture 1, Section II-C, equation (19) in arXiv version
+4, dated 1 November 2025.
+
+\paragraph{{[}2{]}}\label{section-1}
+
+Y. Gu and M. Sellke, \emph{A Counterexample to the Gaussian Completely
+Monotone Conjecture}, 2026 preprint.
+\href{https://arxiv.org/abs/2605.11656v1}{arXiv:2605.11656}.
+
+\paragraph{{[}3{]}}\label{section-2}
+
+J. Zou, L. Fan, J. Gao and J. Wang, \emph{An Explicit Family of
+Log-Concave Counterexamples to the Gaussian Completely Monotone
+Conjecture}, 2026 preprint, version 1, 31 August 2026.
+\href{https://arxiv.org/abs/2608.30275v1}{arXiv:2608.30275}.
+
+\paragraph{{[}4{]}}\label{section-3}
+
+H. Wu and L. Yu, \emph{Entropic Isoperimetric and Cramér--Rao
+Inequalities for Rényi--Fisher Information}, 2025 preprint, version 2,
+11 June 2025.
+\href{https://arxiv.org/abs/2504.01837v2}{arXiv:2504.01837}.
+
+\paragraph{{[}5{]}}\label{section-4}
+
+L. Sun, \emph{Concavity of Tsallis Entropy and Tsallis Entropy Power
+along Heat Flow}, 2026 preprint, version 3, 12 June 2026.
+\href{https://arxiv.org/abs/2601.12944v3}{arXiv:2601.12944}.
+
+\end{document}

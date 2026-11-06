@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0",
+  "contributionMap": [
+    {
+      "claim": "The universal alternating-derivative property for positive Tsallis orders holds exactly at order two.",
+      "unit": "statement",
+      "paperLocation": "Theorem 1; Theorem 2",
+      "searches": [
+        {
+          "date": "2026-11-06",
+          "query": "Tsallis complete monotonicity classification counterexamples; quadratic-only heat orders",
+          "corpus": "primary arXiv versions; Evidence Press canonical catalogue; openai/math overview"
+        }
+      ],
+      "closestPriorWork": "Wu–Yu–Guo v4 Conjecture 1; Gu–Sellke Shannon failure; Zou et al. periodic/Gaussian construction",
+      "verdict": "new-in-bounded-search"
+    },
+    {
+      "claim": "Periodic two-frequency construction, dominant spectral level and Gaussian localization.",
+      "unit": "method",
+      "paperLocation": "Sections 2–3",
+      "searches": [
+        {
+          "date": "2026-11-06",
+          "query": "Zou Fan Gao Wang log-concave complete monotonicity counterexamples",
+          "corpus": "arXiv:2608.30275v1 full relevant arguments"
+        }
+      ],
+      "closestPriorWork": "Zou et al., Theorem 1, Lemmas 3–4, equations (32)–(34)",
+      "verdict": "known-cited"
+    },
+    {
+      "claim": "Dilation preserves derivative-sign failure and permits variance or time normalization.",
+      "unit": "statement",
+      "paperLocation": "Corollary 8",
+      "searches": [
+        {
+          "date": "2026-11-06",
+          "query": "Does standard heat scaling imply this corollary?",
+          "corpus": "Final manuscript Corollary 8 and prior review of heat-scaling identity; retrospective internal comparison, not an external web search"
+        }
+      ],
+      "closestPriorWork": "Elementary heat scaling identity",
+      "verdict": "known-cited"
+    }
+  ],
+  "sourcesReadInFull": [
+    {
+      "citation": "Wu–Yu–Guo 2312.01819v4",
+      "usedFor": "Target conjecture and quadratic case",
+      "readWhat": "Section II-C Fact 1, Conjecture 1 equation (19), Example 2 equation (20), Proposition 3; not a claim to audit all source arguments",
+      "date": "2026-11-06",
+      "evidenceLocator": "https://arxiv.org/html/2312.01819v4; SOURCES.md item 1"
+    },
+    {
+      "citation": "Gu–Sellke 2605.11656v1",
+      "usedFor": "Inherited Shannon failure",
+      "readWhat": "Theorems 1–2, Proposition 1 and Gaussian-mixture derivative justification",
+      "date": "2026-11-06",
+      "evidenceLocator": "https://arxiv.org/html/2605.11656v1; SOURCES.md item 2"
+    },
+    {
+      "citation": "Zou et al. 2608.30275v1",
+      "usedFor": "Inherited construction and additional Tsallis comparison",
+      "readWhat": "Theorem 1, spectral grouping, Lemmas 3–4, equations (32)–(34), Corollary 5",
+      "date": "2026-11-06",
+      "evidenceLocator": "https://arxiv.org/html/2608.30275v1; SOURCES.md item 3"
+    }
+  ],
+  "limitationTriage": [
+    {
+      "limitation": "Time and variance normalization",
+      "closingQuestion": "Does elementary scaling remove arbitrary units?",
+      "triedOrSearched": "Heat dilation derived and proved in Corollary 8",
+      "estimatedCost": "Not measured",
+      "cheap": true,
+      "decision": "CLOSED",
+      "reasonOpen": "",
+      "whyNotClosedNow": ""
+    },
+    {
+      "limitation": "No least failing derivative order or single finite log-concave witness near order two",
+      "closingQuestion": "Does the current proof supply a sharp threshold?",
+      "triedOrSearched": "Reviewed asymptotic constants and explicit finite construction; these do not establish that stronger claim",
+      "estimatedCost": "Unknown; new research",
+      "cheap": false,
+      "decision": "OPEN",
+      "reasonOpen": "Existing asymptotic and finite constructions have different scope",
+      "whyNotClosedNow": "No sound immediate derivation; not needed for classification"
+    },
+    {
+      "limitation": "No exhaustive novelty guarantee",
+      "closingQuestion": "Did bounded primary-source and archive comparison identify an equivalent theorem?",
+      "triedOrSearched": "See CITATION_AUDIT.md and SOURCES.md",
+      "estimatedCost": "Not measured",
+      "cheap": false,
+      "decision": "OPEN",
+      "reasonOpen": "Search cannot prove universal absence",
+      "whyNotClosedNow": "Preserve explicit bounded-search qualification"
+    }
+  ],
+  "extensionScout": {
+    "by": "Internal AI-assisted editorial and mathematical checks",
+    "date": "2026-11-06",
+    "proposals": [
+      "Dilation normalization",
+      "Sharp derivative threshold or finite log-concave witness"
+    ],
+    "actions": [
+      "Proved elementary Corollary 8",
+      "Not claimed; requires separate research"
+    ]
+  }
+}
